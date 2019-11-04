@@ -6,7 +6,6 @@ const saltRounds = 10;
 const myPlaintextPassword = "s0//P4$$w0rD";
 const someOtherPlaintextPassword = "not_bacon";
 
-
 var db = mongoose.connection;
 
 var UserSchema = mongoose.Schema({
@@ -17,22 +16,24 @@ var UserSchema = mongoose.Schema({
 
 var User = (module.exports = mongoose.model("User", UserSchema));
 
-module.exports.getUserById = (id,callback) => {
-    User.findById(id,callback)
-}
+module.exports.getUserById = (id, callback) => {
+  User.findById(id, callback);
+};
 
-module.exports.getUserByUsername = (username,callback) => {
-    var query = {username:username}
-    User.findOne(query,callback)
-}
+module.exports.getUserByUsername = (username, callback) => {
+  var query = { username: username };
+  User.findOne(query, callback);
+};
 
-module.exports.comparePassword = (candidatePassword,hash,callback) => {
-    console.log(candidatePassword)
-    bcrypt.compare(candidatePassword,hash,(err,result)=>{
-        if (err) { throw (err); }
-        callback(null,result);
-    })
-}
+module.exports.comparePassword = (candidatePassword, hash, callback) => {
+  console.log(candidatePassword);
+  bcrypt.compare(candidatePassword, hash, (err, result) => {
+    if (err) {
+      throw err;
+    }
+    callback(null, result);
+  });
+};
 
 // module.exports.comparePassword = (candidatePassword,hash,callback) => {
 //     bcrypt.compareSync("a", hash, function(err, result) {
@@ -44,12 +45,10 @@ module.exports.comparePassword = (candidatePassword,hash,callback) => {
 // }
 
 module.exports.createUser = (newUser, callback) => {
- bcrypt.genSalt(saltRounds, function(err, salt) {
+  bcrypt.genSalt(saltRounds, function(err, salt) {
     bcrypt.hash(newUser.password, salt, function(err, hash) {
-        newUser.password = hash;
-        newUser.save();
+      newUser.password = hash;
+      newUser.save();
     });
   });
-
-
 };

@@ -4,7 +4,8 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', ensureAuthenticated, function(req, res, next) {
   // res.send(req.flash());
-  res.render('index', { title: 'Member'});
+  // res.render('index', { title: 'Member'});
+  res.json({ data: 'home' })
 });
 
 function ensureAuthenticated(req,res,next){

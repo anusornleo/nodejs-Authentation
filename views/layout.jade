@@ -2,19 +2,22 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    //- link(rel='stylesheet', href='/stylesheets/style.css')
   body
+    #app
+      ul
+        if user
+          li
+            a(href='/') Member
+        if !user
+          li
+            a(href='/users/login') Login
+          li
+            a(href='/users/register') Register
+        if user
+          li
+            a(href='/users/logout') Logout
     
-    ul
-      if user
-        li
-          a(href='/') Member
-      if !user
-        li
-          a(href='/users/login') Login
-        li
-          a(href='/users/register') Register
-      if user
-        li
-          a(href='/users/logout') Logout
-    block content
+      cruel-world(user=user)
+      block content
+    script(src="javascripts/bundle.js")

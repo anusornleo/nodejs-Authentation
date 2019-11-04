@@ -31,19 +31,15 @@ router.post("/register", function(req, res, next) {
 });
 
 router.get("/login", function(req, res, next) {
-  // res.send(req.flash());
-  res.render("login", { title: "Login" ,msg:req.flash()});
+  
+  // res.render("login", { title: "Login" ,msg:req.flash()});
+  res.json({ data: 'login' ,message:req.flash('error')})
 });
-
-// router.post("/login", function(req, res, next) {
-//   const body = req.body
-//   res.send(body);
-// });
 
 router.post(
   "/login",
-  passport.authenticate("local", {
-    failureRedirect: "/users/login",
+  passport.authenticate("local",{
+    failureRedirect: '/users/login',
     failureFlash: true
   }),
 
@@ -88,11 +84,10 @@ passport.use(
 router.get("/logout", (req, res, next)=> {
   req.logout()
   req.flash('success','You are logged out')
-  res.render("login", { title: "Login"});
+  res.redirect("/");
 });
 
 router.get('*',function (req, res, next) {
-  console.log("xxxxxxxxxxxxxxxxx")
   res.locals.login = req.isAuthenticated();
   console.log(res.locals.login)
   next();

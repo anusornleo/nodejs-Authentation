@@ -14,11 +14,20 @@ var bcrypt = require('bcrypt')
 var mongodb = require('mongodb')
 var mongoose = require('mongoose')
 var db = mongoose.connection
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-
 var app = express();
+var cors = require('cors');
+
+app.use(cors())
+
+// const corsConfig = function(req, res, next) {
+//   res.header('Access-Control-Allow-Origin', 'http://localhost:8000')
+//   res.header('Access-Control-Allow-Credentials', true)
+//   res.header('Access-Control-Allow-Methods', 'GET,HEAD,OPTIONS,POST,PUT')
+//   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization')
+//   next()
+// }
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -31,26 +40,16 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({
-  secret:'secret',
+  secret:'test',
   saveUninitialized:true,
   resave:true
 }))
-
 
 app.use(flash());
 app.use((req,res,next)=>{
   res.locals.messages = require('express-messages')(req,res);
   next();
 })
-
-// app.get('*',(req,res,next)=>{
-//   res.locals.user = req.user || null
-//   console.log("xxxxxxxxxxxxxxxxx")
-//   console.log(req.isAuthenticated())
-//   next()
-// })
-
-
 
 app.use(passport.initialize())
 app.use(passport.session())
@@ -77,5 +76,6 @@ app.use(function(err, req, res, next) {
 });
 
 
+// app.use(corsConfig);
 
 module.exports = app;
