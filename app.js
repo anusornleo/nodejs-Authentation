@@ -19,7 +19,7 @@ var usersRouter = require('./routes/users');
 var app = express();
 var cors = require('cors');
 
-const PORT = process.env.PORT || 4000
+const PORT = process.env.PORT || 2000
 
 app.listen(PORT, () => {
   console.log(`Server is listening on ${PORT}`)
