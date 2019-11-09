@@ -75,6 +75,11 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+app.use(function(req, res, next) {
+  res.locals.messages = req.flash();
+  next();
+});
+
 
 // app.use(corsConfig);
 
