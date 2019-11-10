@@ -1,5 +1,6 @@
 var mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost:27017/nodeJS",{ useNewUrlParser: true });
+// mongoose.connect("mongodb://localhost:27017/nodeJS",{ useNewUrlParser: true });
+mongoose.connect("mongodb+srv://leo:8450@cluster0-j670a.gcp.mongodb.net/nodeJS",{ useNewUrlParser: true });
 
 const bcrypt = require("bcrypt");
 const saltRounds = 10;

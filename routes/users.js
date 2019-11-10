@@ -16,7 +16,8 @@ router.get("/", function(req, res, next) {
 });
 
 router.get("/register", function(req, res, next) {
-  res.render("register");
+  // res.render("register");
+  res.send({ data: "regis", message: req.flash("error") });
 });
 
 router.post("/register", function(req, res, next) {
@@ -24,8 +25,9 @@ router.post("/register", function(req, res, next) {
   const user = new User(body);
   User.createUser(user, (err, user) => {
     if (err) throw err;
-    res.render("login", { title: "Login" });
-    // res.redirect("/login");
+    // res.render("login", { title: "Login" });
+    res.redirect("/login");
+    // res.send({ data: "regis complete", message: req.flash("error") });
   });
 });
 
