@@ -2,12 +2,13 @@
   "name": "authen",
   "version": "0.0.0",
   "engines": {
-    "node": "10.15.0"
+    "node": "12.x"
   },
+  "main": "index.js",
   "private": true,
   "scripts": {
-    "start": "node app.js",
-    "build": "node app.js"
+    "start": "node index.js",
+    "test": "node test.js"
   },
   "dependencies": {
     "bcrypt": "^3.0.6",
@@ -30,5 +31,10 @@
     "passport-local": "*",
     "vue": "^2.6.10",
     "vueify": "^9.4.1"
-  }
+  },
+  "keywords": [
+    "node",
+    "heroku",
+    "express"
+  ]
 }
